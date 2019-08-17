@@ -47,9 +47,6 @@
         </div>
       );
     }
-
-
-
     const Products = ({data}) => {
       return (
         <div>
@@ -62,8 +59,6 @@
       </div>
       );
     }
-
-
     const Nav = (props) => {
       const companies = props.companies;
       const path = props.location.pathname;
@@ -71,11 +66,10 @@
         <div className ='nav'>
         <Link to='/' className={ path === '/' ? 'selected': ''}>Home</Link>
         <Link to='/companies' className={ path === '/companies' ? 'selected': ''}>Companies({companies.length})</Link>
-        <Link to='/products' className={ path === '/products' ? 'selected': ''}>Products</Link>
+        <Link to='/products' className={ path === '/products' ? 'selected': ''}>Products()</Link>
         </div>
       );
     }
-
     class App extends Component {
         constructor() {
           super();
@@ -85,22 +79,16 @@
             offerings: []
           }
         }
-
-
     async componentDidMount() {
       const companies = (await axios.get('https://acme-users-api-rev.herokuapp.com/api/companies')).data;
       const products = (await axios.get(
       'https://acme-users-api-rev.herokuapp.com/api/products')).data;
       const offerings = (await axios.get(
       'https://acme-users-api-rev.herokuapp.com/api/offerings')).data;
-
-
       this.setState( { companies, products } );
       // this.setState({ products });
       // this.setState({ offerings });
     }
-
-
     render() {
       const { companies, products } = this.state;
       // const { products } = this.state;
@@ -109,11 +97,8 @@
         <HashRouter>
           <div>
          <Route render={ (props) => <Nav companies={companies} location={props.location}/>}/>
-
          <Route exact path ='/' component ={Home}/>
-
          <Route path = '/companies' render={()=> <Companies data = {companies}/>} />
-
           <Route path = '/products' render={()=> <Products data = {products}/>} />
           </div>
         </HashRouter>
