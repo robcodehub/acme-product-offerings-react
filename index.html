@@ -98,6 +98,7 @@
          <Route render={ (props) => <Nav companies={companies} location={props.location}/>}/>
          <Route exact path ='/' component ={Home}/>
          <Route path = '/companies' render={()=> <Companies data = {companies}/>} />
+          <Route path = '/product' render={()=> <Products data = {products}/>} />
           </div>
         </HashRouter>
       )
