@@ -62,6 +62,8 @@
     const Nav = (props) => {
       const companies = props.companies;
       const products = props.products;
+      const offerings = props.offerings;
+      console.log("OFFERINGS ", offerings)
       const path = props.location.pathname;
       console.log("PRODUCTS ", products.length)
       return(
@@ -87,18 +89,18 @@
       'https://acme-users-api-rev.herokuapp.com/api/products')).data;
       const offerings = (await axios.get(
       'https://acme-users-api-rev.herokuapp.com/api/offerings')).data;
-      this.setState( { companies, products } );
+      this.setState( { companies, products, offerings} );
       // this.setState({ products });
       // this.setState({ offerings });
     }
     render() {
-      const { companies, products } = this.state;
+      const { companies, products, offerings } = this.state;
       // const { products } = this.state;
       // const { offerings } = this.state;
       return (
         <HashRouter>
           <div>
-         <Route render={ (props) => <Nav companies={companies} products={products} location={props.location}/>}/>
+         <Route render={ (props) => <Nav companies={companies} products={products} offerings={offerings}location={props.location}/>}/>
          <Route exact path ='/' component ={Home}/>
          <Route path = '/companies' render={()=> <Companies data = {companies}/>} />
           <Route path = '/products' render={()=> <Products data = {products}/>} />
