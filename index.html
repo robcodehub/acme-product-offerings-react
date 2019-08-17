@@ -61,12 +61,14 @@
     }
     const Nav = (props) => {
       const companies = props.companies;
+      const products = props.products;
       const path = props.location.pathname;
+      console.log("PRODUCTS ", products.length)
       return(
         <div className ='nav'>
         <Link to='/' className={ path === '/' ? 'selected': ''}>Home</Link>
         <Link to='/companies' className={ path === '/companies' ? 'selected': ''}>Companies({companies.length})</Link>
-        <Link to='/products' className={ path === '/products' ? 'selected': ''}>Products()</Link>
+        <Link to='/products' className={ path === '/products' ? 'selected': ''}>Products({products.length})</Link>
         </div>
       );
     }
@@ -96,7 +98,7 @@
       return (
         <HashRouter>
           <div>
-         <Route render={ (props) => <Nav companies={companies} location={props.location}/>}/>
+         <Route render={ (props) => <Nav companies={companies} products={products} location={props.location}/>}/>
          <Route exact path ='/' component ={Home}/>
          <Route path = '/companies' render={()=> <Companies data = {companies}/>} />
           <Route path = '/products' render={()=> <Products data = {products}/>} />
