@@ -1,29 +1,86 @@
 <!DOCTYPE html>
 
-<html>
+  <html>
 
-<head>
+    <head>
 
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+      <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+      <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"></script>
+      <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-  <style>
-
-
-  </style>
+      <style>
 
 
-</head>
-
-<body>
+      </style>
 
 
-<script>
-</script>
-</body>
+    </head>
+
+  <body>
+    <div id='root'>
+
+    </div>
+
+    <script type='text/babel'>
+
+    const { render } = ReactDOM;
+    const { Component } = React;
+    const { HashRouter } = ReactRouterDOM;
+    const root = document.querySelector('#root');
+
+
+      class App extends Component {
+        constructor() {
+          super();
+          this.state = {
+            companies: [],
+            products: [],
+            offerings: []
+          }
+        }
+
+
+    async componentDidMount() {
+      const companies = (await axios.get('https://acme-users-api-rev.herokuapp.com/api/companies')).data;
+
+      const products = (await axios.get(
+      'https://acme-users-api-rev.herokuapp.com/api/products')).data;
+      const offerings = (await axios.get(
+      'https://acme-users-api-rev.herokuapp.com/api/offerings')).data;
+
+
+      this.setState( { companies } );
+      this.setState({ products });
+      this.setState({ offerings });
+    }
+
+    render() {
+      const { companies} = this.state;
+      const { products } = this.state;
+      const { offerings } = this.state;
+
+      return (
+        <HashRouter>
+          <div>
+            testing
+          </div>
+
+        </HashRouter>
+
+      )
+
+    }
+
+      }
+    render(<App />, root);
+
+
+    </script>
+
+
+  </body>
 
 
 </html>
