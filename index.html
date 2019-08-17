@@ -47,11 +47,16 @@
         </div>
       );
     }
+
+
+
     const Products = () => {
       return (
         <h1>Products</h1>
       )
     }
+
+
     const Nav = (props) => {
       const companies = props.companies;
       const path = props.location.pathname;
@@ -63,6 +68,7 @@
         </div>
       );
     }
+
     class App extends Component {
         constructor() {
           super();
@@ -72,26 +78,35 @@
             offerings: []
           }
         }
+
+
     async componentDidMount() {
       const companies = (await axios.get('https://acme-users-api-rev.herokuapp.com/api/companies')).data;
       const products = (await axios.get(
       'https://acme-users-api-rev.herokuapp.com/api/products')).data;
       const offerings = (await axios.get(
       'https://acme-users-api-rev.herokuapp.com/api/offerings')).data;
-      this.setState( { companies } );
+
+
+      this.setState( { companies, products } );
       // this.setState({ products });
       // this.setState({ offerings });
     }
+
+
     render() {
-      const { companies} = this.state;
+      const { companies, products } = this.state;
       // const { products } = this.state;
       // const { offerings } = this.state;
       return (
         <HashRouter>
           <div>
          <Route render={ (props) => <Nav companies={companies} location={props.location}/>}/>
+
          <Route exact path ='/' component ={Home}/>
+
          <Route path = '/companies' render={()=> <Companies data = {companies}/>} />
+
           <Route path = '/products' render={()=> <Products data = {products}/>} />
           </div>
         </HashRouter>
