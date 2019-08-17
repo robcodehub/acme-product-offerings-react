@@ -31,11 +31,13 @@
     const { Component } = React;
     const { HashRouter, Link, Route} = ReactRouterDOM;
     const root = document.querySelector('#root');
+
     const Home = () => {
       return (
         <h1>Home</h1>
       )
     }
+
     const Companies = ({data}) => {
       return(
         <div>
@@ -48,6 +50,14 @@
         </div>
       );
     }
+
+    const Products = () => {
+      return (
+        <h1>Products</h1>
+      )
+    }
+
+
     const Nav = (props) => {
       const companies = props.companies;
       const path = props.location.pathname;
@@ -55,6 +65,7 @@
         <div className ='nav'>
         <Link to='/' className={ path === '/' ? 'selected': ''}>Home</Link>
         <Link to='/companies' className={ path === '/companies' ? 'selected': ''}>Companies({companies.length})</Link>
+        <Link to='/products' className={ path === '/products' ? 'selected': ''}>Products</Link>
         </div>
       );
     }
