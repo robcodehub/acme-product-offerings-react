@@ -15,7 +15,6 @@
       display: flex;
       justify-content: space-around;
     }
-
   </style>
 
 
@@ -31,13 +30,11 @@
     const { Component } = React;
     const { HashRouter, Link, Route} = ReactRouterDOM;
     const root = document.querySelector('#root');
-
     const Home = () => {
       return (
         <h1>Home</h1>
       )
     }
-
     const Companies = ({data}) => {
       return(
         <div>
@@ -50,14 +47,11 @@
         </div>
       );
     }
-
     const Products = () => {
       return (
         <h1>Products</h1>
       )
     }
-
-
     const Nav = (props) => {
       const companies = props.companies;
       const path = props.location.pathname;
@@ -98,7 +92,7 @@
          <Route render={ (props) => <Nav companies={companies} location={props.location}/>}/>
          <Route exact path ='/' component ={Home}/>
          <Route path = '/companies' render={()=> <Companies data = {companies}/>} />
-          <Route path = '/product' render={()=> <Products data = {products}/>} />
+          <Route path = '/products' render={()=> <Products data = {products}/>} />
           </div>
         </HashRouter>
       )
