@@ -41,7 +41,7 @@
         <h1>Companies</h1>
         {
           data.map(company => {
-            return <li key={company.id}>{company.name}</li>
+            return <ul key={company.id}><li >{company.name}</li><li>{company.catchPhrase}</li><li>Offering:</li></ul>
           })
         }
         </div>
@@ -53,7 +53,7 @@
         <h1>Products</h1>
         {
           data.map(product => {
-            return <li key={product.id}>{product.name}</li>
+            return <ul key={product.id}><li>{product.name}</li><li>${product.suggestedPrice}</li><li>{product.description}</li><li>Offered by:</li></ul>
           })
         }
       </div>
