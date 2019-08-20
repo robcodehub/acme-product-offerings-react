@@ -47,15 +47,25 @@
         </div>
       );
     }
-    const Products = ({data}) => {
-      console.log("DATA ", data)
-
+    const Products = ({data, data2, data3}) => {
+      console.log("PRODUCTS", data)
+      console.log("OFFERINGS", data2)
+      console.log("COMPANIES", data3)
       return (
         <div>
         <h1>Products</h1>
         {
           data.map(product => {
-            return <ul key={product.id}><li>{product.name}</li><li>${product.suggestedPrice}</li><li>{product.description}</li><li>Offered by:</li></ul>
+            return data2.filter(_offering => {
+              if(_offering.productId === product.id){
+                return data3.filter(_company => {
+                  return _company.name
+                })
+              }
+            })
+            return <ul key={product.id}><li>{product.name}</li><li>${product.suggestedPrice}</li><li>{product.description}</li>
+            <li>Offered by:</li>
+            </ul>
           })
         }
       </div>
@@ -63,15 +73,14 @@
     }
 
     const Offerings = ({data}) => {
-    
+      return data;
 
     }
-    const Nav = (props) => {
-      const companies = props.companies;
-      const products = props.products;
-      const offerings = props.offerings;
-      console.log("OFFERINGS ", offerings)
-      const path = props.location.pathname;
+    const Nav = ({companies, products, offerings, path}) => {
+      // console.log("PROPS ", props)
+
+      // console.log("OFFERINGS ", offerings)
+      path = location.pathname;
       console.log("PRODUCTS ", products.length)
       return(
         <div className ='nav'>
@@ -97,20 +106,18 @@
       const offerings = (await axios.get(
       'https://acme-users-api-rev.herokuapp.com/api/offerings')).data;
       this.setState( { companies, products, offerings} );
-      // this.setState({ products });
-      // this.setState({ offerings });
+
     }
     render() {
       const { companies, products, offerings } = this.state;
-      // const { products } = this.state;
-      // const { offerings } = this.state;
+
       return (
         <HashRouter>
           <div>
          <Route render={ (props) => <Nav companies={companies} products={products} offerings={offerings}location={props.location}/>}/>
          <Route exact path ='/' component ={Home}/>
-         <Route path = '/companies' render={()=> <Companies data = {companies}/>} />
-          <Route path = '/products' render={()=> <Products data = {products}/>} />
+         <Route path = '/companies' render={(props)=> <Companies data = {companies}/>} />
+          <Route path = '/products' render={(props)=> <Products data = {products} data2 = {offerings} data3 = {companies}/>} />
           </div>
         </HashRouter>
       )
